@@ -1,0 +1,64 @@
+'use strict';
+const { ipcRenderer } = require('electron');
+const { BrowserWindow } = require('electron').remote;
+const path = require('path');
+const url = require('url');
+const sqlite3 = require('sqlite3').verbose();
+
+var db = new sqlite3.Database('userInfo.db');
+db.run("CREATE TABLE if not exists userinfo(username TEXT NOT NULL, password TEXT NOT NULL)");
+
+// For testing 
+//db.run("INSERT INTO userinfo VALUES(?, ?)", ["username123", "password"]);
+
+
+var loginBtn = document.getElementById("loginBtn");
+var createAccountBtn = document.getElementById("createAccountBtn");
+
+loginBtn.addEventListener('click', function() {
+    var username=document.getElementById("username").value;
+    var password=document.getElementById("password").value; 
+
+    db.get("SELECT * FROM userinfo WHERE username = ?", username, (err, rows) => {
+        console.log(rows)
+        if (err) {
+            console.log(err.message);
+            console.log("User does not exist!");
+        }
+        else if(rows.password != password) {
+            console.log("Incorrect Password!");
+        }
+        else {
+            // Login success
+            let win = new BrowserWindow({ width: 800, 
+                height: 600, 
+                frame: false ,  
+                webPreferences: {
+                  nodeIntegration: true
+              }})
+            const htmlPath = path.join(__dirname, 'app/html/main.html');
+            win.on('close', () => {win = null})
+            win.loadURL(htmlPath)
+            win.show()
+        }
+    })
+});
+
+createAccountBtn.addEventListener('click', function() {
+    let win = new BrowserWindow({ width: 800, 
+                                  height: 600, 
+                                  frame: false ,  
+                                  webPreferences: {
+                                    nodeIntegration: true
+                                }})
+    const htmlPath = path.join(__dirname, 'app/html/newUser.html');
+    win.on('close', () => {win = null})
+    win.loadURL(htmlPath)
+    win.show()
+    win.webContents.on('did-finish-load', () => {
+        win.webContents.send('message', 'Hello second window!');
+    });
+    ipcRenderer.on('newAccountInfo', (event, arg) => {
+        console.log(arg);
+    })
+});
