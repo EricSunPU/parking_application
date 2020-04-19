@@ -48,12 +48,20 @@
         </center>
         <center><timeSelection id="timeSelection" role="timeSelection">
             <label for="startingTime">Start Time:</label>
-            <input type="datetime-local" id="startingTime" name="startingTime"><br><br>
+            <input type="time" id="startingTime" name="startingTime"><br><br>
             <label for="endingTime">End Time:</label>
-            <input type="datetime-local" id="endingTime" name="endingTime"><br><br>
+            <input type="time" id="endingTime" name="endingTime"><br><br>
+            <button id="confirmBtn">Confirm</button>
         </timeSelection></center>
+        <br>
         <center>
-            <button id="confirmBtm">Confirm</button>
+            <rateCalculator>
+                <label for="totalHr">Total Hours: </label>
+                <output id="totalHr">0</output>
+                <br>
+                <label for="balance">Balance: $</label>
+                <output id="balance">0</output>
+            </rateCalculator>
         </center>
         <script src="../js/main.js"></script>
     </body>
