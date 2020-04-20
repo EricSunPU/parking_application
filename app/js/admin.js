@@ -21,12 +21,15 @@ loginBtn.addEventListener('click', function() {
 
     db.get("SELECT * FROM userinfo WHERE username = ?", username, (err, rows) => {
         console.log(rows)
-        if (err) {
-            console.log(err.message);
+        if (rows == null) {
+            ipcRenderer.send('user-not-exist-error');
             console.log("User does not exist!");
+            return;
         }
         else if(rows.password != password) {
+            ipcRenderer.send('incorrect-password-error');
             console.log("Incorrect Password!");
+            return;
         }
         else {
             // Login success
