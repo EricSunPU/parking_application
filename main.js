@@ -1,6 +1,11 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
+const {ipcMain, dialog} = require('electron')
 const path = require('path')
+
+ipcMain.on('time-error', (event) => {
+  dialog.showErrorBox('Time Error', 'Invalid Starting Time or Ending Time');
+})
 
 function createWindow () {
   // Create the browser window.
