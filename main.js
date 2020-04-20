@@ -7,6 +7,14 @@ ipcMain.on('time-error', (event) => {
   dialog.showErrorBox('Time Error', 'Invalid Starting Time or Ending Time');
 })
 
+ipcMain.on('user-not-exist-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'User Does Not Exist!');
+})
+
+ipcMain.on('incorrect-password-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'Invalid Password!');
+})
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
