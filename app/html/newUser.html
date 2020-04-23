@@ -11,14 +11,17 @@
   <body>
     <center><h2>Create a New Account</h2></center>
     <center><create id="create" role="create">
-      <label for="username">Username:</label>
+      <label for="username">Choose a Username:</label>
       <input type="text" id="username" name="username"><br><br>
-      <label for="password">Password:</label>
-      <input type="text" id="password" name="password"><br><br>
+      <label for="password">Choose a Password:</label>
+      <input type="password" id="password" name="password"><br><br>
+      <label for="double-check">Confirm Your Password:</label>
+      <input type="password" id="double-check" name="double-check"><br><br>
+      <input type="checkbox" id="show-password">Show Password<br><br>
       <button id="createAccountBtn">Create New Account</button>
     </create></center>
-    <br><br>
-    <center><a id="close" href="javascript:window.close()">Close this Window</a></center>
+    <br><br><br>
+    <center><a id="close">Close this Window</a></center>
     <!-- You can also require other files to run in this process -->
     <script src="../js/newUser.js"></script>
   </body>

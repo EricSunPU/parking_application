@@ -15,6 +15,26 @@ ipcMain.on('incorrect-password-error', (event) => {
   dialog.showErrorBox('Authentication Error', 'Invalid Password!');
 })
 
+ipcMain.on('duplicate-username-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'User Already Exist! Please Try Another One.');
+})
+
+ipcMain.on('new-user-registration-success', (event) => {
+  const options = {
+    type: 'info',
+    title: 'Registration Success',
+    message: "Registration Success! You Can Close This Window Now.",
+    buttons: ['OK']
+  }
+  dialog.showMessageBox(options, (index) => {
+    event.sender.send('close-new-user-window', index);
+  });
+})
+
+ipcMain.on('non-consistent-password-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'Password Doesn\'t Match');
+})
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
