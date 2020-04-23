@@ -23,6 +23,10 @@ ipcMain.on('new-user-registration-success', (event) => {
   dialog.showMessageBox('Registration Success', 'Registration Success! You Can Close This Window.');
 })
 
+ipcMain.on('non-consistent-password-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'Password Doesn\'t Match');
+})
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

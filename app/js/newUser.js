@@ -8,10 +8,17 @@ ipcRenderer.on('message', (event, message) => {
 
 var closeBtn = document.getElementById('close');
 var createBtn = document.getElementById('createAccountBtn');
+var showPasswordBtn = document.getElementById('show-password');
 
 createBtn.addEventListener('click', function() {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('double-check').value;
+
+    if (password != confirmPassword) {
+        ipcRenderer.send('non-consistent-password-error');
+        return;
+    }
 
     db.get("SELECT * FROM userinfo WHERE username = ?", username, (err, rows) => {
         console.log(rows);
