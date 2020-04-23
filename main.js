@@ -15,6 +15,14 @@ ipcMain.on('incorrect-password-error', (event) => {
   dialog.showErrorBox('Authentication Error', 'Invalid Password!');
 })
 
+ipcMain.on('duplicate-username-error', (event) => {
+  dialog.showErrorBox('Authentication Error', 'User Already Exist! Please Try Another One.');
+})
+
+ipcMain.on('new-user-registration-success', (event) => {
+  dialog.showMessageBox('Registration Success', 'Registration Success! You Can Close This Window.');
+})
+
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

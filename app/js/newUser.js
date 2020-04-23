@@ -16,11 +16,18 @@ createBtn.addEventListener('click', function() {
     db.get("SELECT * FROM userinfo WHERE username = ?", username, (err, rows) => {
         console.log(rows);
         if (rows == null) {
+            ipcRenderer.send('new-user-registration-success');
             console.log("Account Creation Success!");
             db.run("INSERT INTO userinfo VALUES(?, ?)", [username, password]);
         }
         else {
+            ipcRenderer.send('duplicate-username-error');
             console.log("Invalid Username,  Already Exist!");
         }
     })
 });
+
+closeBtn.addEventListener('click', function() {
+    window.close();
+});
+
