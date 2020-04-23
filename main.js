@@ -20,7 +20,15 @@ ipcMain.on('duplicate-username-error', (event) => {
 })
 
 ipcMain.on('new-user-registration-success', (event) => {
-  dialog.showMessageBox('Registration Success', 'Registration Success! You Can Close This Window.');
+  const options = {
+    type: 'info',
+    title: 'Registration Success',
+    message: "Registration Success! You Can Close This Window Now.",
+    buttons: ['OK']
+  }
+  dialog.showMessageBox(options, (index) => {
+    event.sender.send('close-new-user-window', index);
+  });
 })
 
 ipcMain.on('non-consistent-password-error', (event) => {

@@ -24,8 +24,11 @@ createBtn.addEventListener('click', function() {
         console.log(rows);
         if (rows == null) {
             ipcRenderer.send('new-user-registration-success');
-            console.log("Account Creation Success!");
             db.run("INSERT INTO userinfo VALUES(?, ?)", [username, password]);
+            ipcRenderer.on('close-new-user-window', (event, index) => {
+                console.log("Hello");
+                window.close();
+            })
         }
         else {
             ipcRenderer.send('duplicate-username-error');
@@ -36,5 +39,17 @@ createBtn.addEventListener('click', function() {
 
 closeBtn.addEventListener('click', function() {
     window.close();
+});
+
+showPasswordBtn.addEventListener('click', function() {
+    var password = document.getElementById('password');
+    var confirmPassword = document.getElementById('double-check');
+    if (password.type == "password") {
+        password.type = "text";
+        confirmPassword.type = "text";
+    } else {
+        password.type = "password";
+        confirmPassword.type = "password";
+    }
 });
 
