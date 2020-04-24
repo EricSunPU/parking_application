@@ -38,6 +38,10 @@ confirmBtn.addEventListener('click', function() {
     var start = split(startingTime);
     var end = split(endingTime);
     var hr = end[0] - start[0];
+    var min = end[1] - start[1];
+    if (min > 0) {
+        hr++
+    }
     totalHr.value = hr;
     balance.value = hr;
 })
