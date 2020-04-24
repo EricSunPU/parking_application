@@ -1,5 +1,6 @@
 const { ipcRenderer, dialog} = require('electron');
 
+var username = document.getElementById("username")
 var confirmBtn = document.getElementById("confirmBtn")
 var totalHr = document.getElementById("totalHr")
 var balance = document.getElementById("balance")
@@ -13,6 +14,10 @@ var B2 = document.getElementById("B2")
 var B3 = document.getElementById("B3")
 var B4 = document.getElementById("B4")
 var B5 = document.getElementById("B5")
+
+ipcRenderer.on('username', (event, message) => {
+    username.value = message;
+})
 
 confirmBtn.addEventListener('click', function() {
     var startingTime = document.getElementById("startingTime").value;

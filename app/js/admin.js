@@ -34,15 +34,18 @@ loginBtn.addEventListener('click', function() {
         else {
             // Login success
             let win = new BrowserWindow({ width: 800, 
-                height: 600, 
+                height: 700, 
                 frame: false ,  
                 webPreferences: {
                   nodeIntegration: true
-              }})
+            }})
             const htmlPath = path.join(__dirname, 'app/html/main.html');
             win.on('close', () => {win = null})
             win.loadURL(htmlPath)
             win.show()
+            win.webContents.on('did-finish-load', () => {
+                win.webContents.send('username', username);
+            });
         }
     })
 });
