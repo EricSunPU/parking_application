@@ -24,7 +24,7 @@ createBtn.addEventListener('click', function() {
         console.log(rows);
         if (rows == null) {
             ipcRenderer.send('new-user-registration-success');
-            db.run("INSERT INTO userinfo VALUES(?, ?)", [username, password]);
+            db.run("INSERT INTO userinfo VALUES(?, ?, ?, ?, ?, ?)", [username, password, 0, 0, null, null]);
             ipcRenderer.on('close-new-user-window', (event, index) => {
                 console.log("Hello");
                 window.close();

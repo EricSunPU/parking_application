@@ -1,9 +1,12 @@
 const { ipcRenderer, dialog} = require('electron');
+const { BrowserWindow } = require('electron').remote;
+const path = require('path');
 
 var username = document.getElementById("username")
 var confirmBtn = document.getElementById("confirmBtn")
 var totalHr = document.getElementById("totalHr")
 var balance = document.getElementById("balance")
+var settings = document.getElementById("settings")
 var A1 = document.getElementById("A1")
 var A2 = document.getElementById("A2")
 var A3 = document.getElementById("A3")
@@ -15,8 +18,37 @@ var B3 = document.getElementById("B3")
 var B4 = document.getElementById("B4")
 var B5 = document.getElementById("B5")
 
+var licencePlate;
+var membership;
+
 ipcRenderer.on('username', (event, message) => {
     username.value = message;
+})
+
+ipcRenderer.on('licence', (event, message) => {
+    licencePlate = message;
+    console.log(message);
+})
+
+ipcRenderer.on('membership', (event, message) => {
+    membership = message;
+    console.log(membership);
+})
+
+settings.addEventListener('click', function() {
+    let win = new BrowserWindow({ width: 800, 
+        height: 700, 
+        frame: false ,  
+        webPreferences: {
+          nodeIntegration: true
+    }})
+    const htmlPath = path.join(__dirname, 'settings.html');
+    win.on('close', () => {win = null})
+    win.loadURL(htmlPath)
+    win.show()
+    win.webContents.on('did-finish-load', () => {
+
+    });
 })
 
 confirmBtn.addEventListener('click', function() {

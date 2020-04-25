@@ -6,11 +6,11 @@ const url = require('url');
 const sqlite3 = require('sqlite3').verbose();
 
 var db = new sqlite3.Database('userInfo.db');
-db.run("CREATE TABLE if not exists userinfo(username TEXT NOT NULL, password TEXT NOT NULL)");
+db.run("CREATE TABLE if not exists userinfo(username TEXT NOT NULL, password TEXT NOT NULL, accessLevel INTEGER, membership INTEGER, licence TEXT, guestLicence TEXT)");
 
 // For testing 
-//db.run("INSERT INTO userinfo VALUES(?, ?)", ["username123", "password"]);
-
+//db.run("INSERT INTO userinfo VALUES(?, ?, ?, ?, ?, ?)", ["username123", "password", 0, 1, "GPA40", null]);
+//db.run("INSERT INTO userinfo VALUES(?, ?, ?, ?, ?, ?)", ["john", "password", 0, 0, null, null]);
 
 var loginBtn = document.getElementById("loginBtn");
 var createAccountBtn = document.getElementById("createAccountBtn");
@@ -45,6 +45,8 @@ loginBtn.addEventListener('click', function() {
             win.show()
             win.webContents.on('did-finish-load', () => {
                 win.webContents.send('username', username);
+                win.webContents.send('licence', rows.licence);
+                win.webContents.send('membership', rows.membership);
             });
         }
     })
