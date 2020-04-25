@@ -4,7 +4,19 @@
         <link rel="stylesheet" href="../css/main.css">
     </head>
     <body>
-        <h1>Parking Spot Selection</h1>
+        <label style="font-size:30px" for="username">Hello! </label>
+        <output style="font-size:30px" id="username"></output>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <a>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp </a>
+        <button id="settings">settings</button><br><br>
+        <label style="font-size:20px" for="title">  Please select a spot: </label><br>
         <table class="responsive-table-input-matrix">
                 <thead>
                 <tr>
@@ -46,6 +58,10 @@
         <center>
             <h2>Rate: $1/hr</h2>
         </center>
+        <center>
+            <label for="spot">Spot: </label>
+            <output id="spot"></output>
+        </center><br>
         <center><timeSelection id="timeSelection" role="timeSelection">
             <label for="startingTime">Start Time:</label>
             <input type="time" id="startingTime" name="startingTime"><br><br>
