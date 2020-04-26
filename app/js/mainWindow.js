@@ -1,6 +1,10 @@
 const { ipcRenderer, dialog} = require('electron');
 const { BrowserWindow } = require('electron').remote;
 const path = require('path');
+const sqlite3 = require('sqlite3').verbose();
+
+var db = new sqlite3.Database('parkingInfo.db');
+db.run("CREATE TABLE if not exists parkinginfo(spot TEXT NOT NULL, startTime INTEGER, endTime INTEGER, licence TEXT)");
 
 var usernameTag = document.getElementById("username")
 var confirmBtn = document.getElementById("confirmBtn")
@@ -23,6 +27,8 @@ var B5 = document.getElementById("B5")
 var licencePlate;
 var membership;
 var username
+var time1;
+var time2;
 
 ipcRenderer.on('username', (event, message) => {
     usernameTag.value = message;
@@ -63,6 +69,8 @@ settings.addEventListener('click', function() {
 confirmBtn.addEventListener('click', function() {
     var startingTime = document.getElementById("startingTime").value;
     var endingTime = document.getElementById("endingTime").value;
+    time1 = startingTime;
+    time2 = endingTime;
     console.log(startingTime)
     console.log(endingTime)
     console.log(endingTime - startingTime);
@@ -275,4 +283,9 @@ B5.addEventListener('click', function() {
     B2.checked = false;
     B3.checked = false;
     B4.checked = false;
+})
+
+checkoutBtn.addEventListener('click', function () {
+    ipcRenderer.send('checkout-success');
+    db.run("INSERT INTO parkinginfo VALUES(?, ?, ?, ?)", [spot.value, time1, time2, licencePlate]);
 })

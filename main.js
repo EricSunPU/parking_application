@@ -50,6 +50,17 @@ ipcMain.on('change-password-success', (event) => {
   });
 })
 
+ipcMain.on('checkout-success', (event) => {
+  const options = {
+    type: 'info',
+    title: 'Success',
+    message: "Success!",
+    buttons: ['OK']
+  }
+  dialog.showMessageBox(options, (index) => {
+  });
+})
+
 ipcMain.on('non-consistent-password-error', (event) => {
   dialog.showErrorBox('Authentication Error', 'Password Doesn\'t Match');
 })
