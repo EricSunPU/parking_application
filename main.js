@@ -15,6 +15,14 @@ ipcMain.on('incorrect-password-error', (event) => {
   dialog.showErrorBox('Authentication Error', 'Invalid Password!');
 })
 
+ipcMain.on('reuse-password-error', (event) => {
+  dialog.showErrorBox('Error', 'Please Use a New Password!');
+})
+
+ipcMain.on('incorrect-double-check-error', (event) => {
+  dialog.showErrorBox('Error', 'Password Doesn\'t Match');
+})
+
 ipcMain.on('duplicate-username-error', (event) => {
   dialog.showErrorBox('Authentication Error', 'User Already Exist! Please Try Another One.');
 })
@@ -28,6 +36,17 @@ ipcMain.on('new-user-registration-success', (event) => {
   }
   dialog.showMessageBox(options, (index) => {
     event.sender.send('close-new-user-window', index);
+  });
+})
+
+ipcMain.on('change-password-success', (event) => {
+  const options = {
+    type: 'info',
+    title: 'Password Update Success',
+    message: "Success! You Can Close This Window Now.",
+    buttons: ['OK']
+  }
+  dialog.showMessageBox(options, (index) => {
   });
 })
 

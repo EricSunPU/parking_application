@@ -6,7 +6,7 @@ const url = require('url');
 const sqlite3 = require('sqlite3').verbose();
 
 var db = new sqlite3.Database('userInfo.db');
-db.run("CREATE TABLE if not exists userinfo(username TEXT NOT NULL, password TEXT NOT NULL, accessLevel INTEGER, membership INTEGER, licence TEXT, guestLicence TEXT)");
+db.run("CREATE TABLE if not exists userinfo(username TEXT NOT NULL, password TEXT, accessLevel INTEGER, membership INTEGER, licence TEXT, guestLicence TEXT)");
 
 // For testing 
 //db.run("INSERT INTO userinfo VALUES(?, ?, ?, ?, ?, ?)", ["username123", "password", 0, 1, "GPA40", null]);
