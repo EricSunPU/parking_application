@@ -2,11 +2,13 @@ const { ipcRenderer, dialog} = require('electron');
 const { BrowserWindow } = require('electron').remote;
 const path = require('path');
 
-var username = document.getElementById("username")
+var usernameTag = document.getElementById("username")
 var confirmBtn = document.getElementById("confirmBtn")
+var checkoutBtn = document.getElementById("checkoutBtn");
 var totalHr = document.getElementById("totalHr")
 var balance = document.getElementById("balance")
 var settings = document.getElementById("settings")
+var settingsDiv = document.getElementById("div1");
 var A1 = document.getElementById("A1")
 var A2 = document.getElementById("A2")
 var A3 = document.getElementById("A3")
@@ -20,9 +22,11 @@ var B5 = document.getElementById("B5")
 
 var licencePlate;
 var membership;
+var username
 
 ipcRenderer.on('username', (event, message) => {
-    username.value = message;
+    usernameTag.value = message;
+    username = message;
 })
 
 ipcRenderer.on('licence', (event, message) => {
@@ -32,6 +36,9 @@ ipcRenderer.on('licence', (event, message) => {
 
 ipcRenderer.on('membership', (event, message) => {
     membership = message;
+    // if (membership == 0) {
+    //     settingsDiv.style.display = "none";
+    // }
     console.log(membership);
 })
 
@@ -47,7 +54,9 @@ settings.addEventListener('click', function() {
     win.loadURL(htmlPath)
     win.show()
     win.webContents.on('did-finish-load', () => {
-
+        win.webContents.send('username', username);
+        win.webContents.send('licence', licencePlate);
+        win.webContents.send('membership', membership);
     });
 })
 

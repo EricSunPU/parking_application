@@ -9,19 +9,50 @@
 
   </head>
   <body>
-    <center><h2>Create a New Account</h2></center>
+    <center><h2>User Settings</h2></center>
     <center><create id="create" role="create">
-      <label for="username">Choose a Username:</label>
-      <input type="text" id="username" name="username"><br><br>
-      <label for="password">Choose a Password:</label>
-      <input type="password" id="password" name="password"><br><br>
-      <label for="double-check">Confirm Your Password:</label>
-      <input type="password" id="double-check" name="double-check"><br><br>
-      <input type="checkbox" id="show-password">Show Password<br><br>
-      <button id="createAccountBtn">Create New Account</button>
+      <label for="username">username: </label>
+      <output id="username"></output><br><br>
+      <button id="changePassword">Change Password</button><br><br>
     </create></center>
+    <div id="changePasswordDiv" >
+        <center>
+        <label for="oldPassword">Enter Your Old Password</label>
+        <input type="password" id="oldPassword" name="oldPassword"><br><br>
+        <label for="password">Choose a New Password:</label>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="double-check">Confirm Your New Password:</label>
+        <input type="password" id="double-check" name="double-check"><br><br>
+        <input type="checkbox" id="show-password">Show Password<br><br>
+        <button id="changePasswordConfirm">Confirm</button><br><br>
+        </center>
+    </div>
+    <div id="joinMembership">
+        <center>
+        <button id="membershipJoin">Join Membership</button>
+        </center>
+    </div>
+    <div id="forMember">
+        <center>
+            <button id="addTmpLicence">Add a Temporary Licence</button><br><br>
+            <div id="tmpLicenceDiv">
+                <center>
+                    <label for="tmpLicence">Enter Your Temporary Licence Number: </label>
+                    <input type="text" id="tmpLicence" name="tmpLicence"><br><br>
+                    <button id="licenceConfirm">Confirm</button><br><br>
+                </center>
+            <div><br>
+            <div>
+                <center>
+                    <button id="endMembership">End Membership</button>
+                </center>
+            </div>
+        </center>
+    <div>
     <br><br><br>
-    <center><a id="close">Close this Window</a></center>
+    <div>
+        <center><button id="close">Close Settings</button></center>
+    </div>
     <!-- You can also require other files to run in this process -->
     <script src="../js/settings.js"></script>
   </body>
